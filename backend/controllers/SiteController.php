@@ -35,7 +35,7 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['create-user', 'update-user', 'users-list', 'delete-user'],
+                        'actions' => ['create-user', 'update-user', 'users-list', 'delete-user', 'ajax-validation'],
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             if(!Yii::$app->user->isGuest){
@@ -68,7 +68,7 @@ class SiteController extends Controller
 
     public function actionUsersList(){
         $dataProvider = new ActiveDataProvider([
-            'query' => User::find(),
+            'query' => User::find()->where(['!=', 'id',  Yii::$app->user->id]),
         ]);
 
         return $this->render('users-list', [
@@ -153,6 +153,10 @@ class SiteController extends Controller
         $model->surname = $user->surname;
         $model->type = $user->status;
         $model->email = $user->email;
+        $model->active_from = $user->active_from;
+        $model->active_to = $user->active_to;
+        $model->authority_certificate = $user->authority_certificate;
+        $model->body_data = $user->body_data;
         $model->password = '';
 
         if ($model->load(Yii::$app->request->post())) {
@@ -177,7 +181,9 @@ class SiteController extends Controller
     public function actionAjaxValidation()
     {
         $post = Yii::$app->request->post();
+        $action = $post['SignupForm']['action'];
         $model = new SignupForm();
+        $model->scenario = $action;
 
         $model->load($post);
 

@@ -10,7 +10,7 @@ use kartik\datetime\DateTimePicker;
 
 //$this->title = 'Signup';
 //$this->params['breadcrumbs'][] = $this->title;
-
+$action = $model->username ? 'update' : 'insert';
 $this->title = $model->username ? 'Update User: ' . $model->username : 'Create User';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['users-list']];
 $this->params['breadcrumbs'][] = 'Update';
@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = 'Update';
                     'enableAjaxValidation' => true
             ]); ?>
 
+                <?= $form->field($model, 'action')->hiddenInput(['value'=> $action])->label(false)?>
+
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'name')->textInput() ?>
@@ -42,7 +44,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     $form->field($model, 'active_from')->widget(DateTimePicker::classname(), [
                         'options' => [
                             'placeholder' => 'Enter event time ...',
-                            'value' => $model->active_from ? date('d-m-y H:i:s', $model->active_from) : '',
+                            'value' => $model->active_from ? date('d-m-Y H:i:s', $model->active_from) : '',
                         ],
                         'pluginOptions' => [
                             'autoclose' => true,
@@ -55,7 +57,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     $form->field($model, 'active_to')->widget(DateTimePicker::classname(), [
                         'options' => [
                             'placeholder' => 'Enter event time ...',
-                            'value' => $model->active_to ? date('d-m-y H:i:s', $model->active_to) : '',
+                            'value' => $model->active_to ? date('d-m-Y H:i:s', $model->active_to) : '',
                         ],
                         'pluginOptions' => [
                             'autoclose' => true,

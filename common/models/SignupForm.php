@@ -8,6 +8,7 @@ use yii\base\Model;
  */
 class SignupForm extends Model
 {
+    public $action;
     public $username;
     public $name;
     public $surname;
@@ -22,8 +23,8 @@ class SignupForm extends Model
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['insert'] = ['username', 'name', 'surname', 'password', 'email', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'];
-        $scenarios['update'] = ['username', 'name', 'surname', 'password', 'email', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'];
+        $scenarios['insert'] = ['action', 'username', 'name', 'surname', 'password', 'email', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'];
+        $scenarios['update'] = ['action', 'username', 'name', 'surname', 'password', 'email', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'];
         return $scenarios;
     }
 
@@ -34,10 +35,10 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'safe', 'on' => ['insert', 'update']],
+            [['action', 'type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'safe', 'on' => ['insert', 'update']],
             [['type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'required', 'on' => ['insert', 'update']],
-            [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false],
-            [['active_from', 'active_to'], 'customDateTimeCompare', 'skipOnEmpty' => false],
+            [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false, 'on' => ['insert', 'update']],
+            [['active_from', 'active_to'], 'customDateTimeCompare', 'skipOnEmpty' => false, 'on' => ['insert', 'update']],
             ['type', 'in', 'range' => [20, 30], 'on' => ['insert', 'update']],
 
             ['username', 'trim', 'on' => ['insert', 'update']],
@@ -73,6 +74,10 @@ class SignupForm extends Model
         $user->status = $this->type;
         $user->name = $this->name;
         $user->surname = $this->surname;
+        $user->active_from = $this->active_from;
+        $user->active_to = $this->active_to;
+        $user->authority_certificate = $this->authority_certificate;
+        $user->body_data = $this->body_data;
         $user->setPassword($this->password);
         $user->generateAuthKey();
 

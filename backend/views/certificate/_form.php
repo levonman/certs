@@ -34,7 +34,7 @@ $sdsList = [
         $form->field($model, 'active_from')->widget(DateTimePicker::classname(), [
         'options' => [
                 'placeholder' => 'Enter event time ...',
-                'value' => $model->active_from ? date('d-m-y H:i:s', $model->active_from) : '',
+                'value' => $model->active_from ? date('d-m-Y H:i:s', $model->active_from) : '',
         ],
             'pluginOptions' => [
             'autoclose' => true,
@@ -46,8 +46,8 @@ $sdsList = [
     <?=
     $form->field($model, 'active_to')->widget(DateTimePicker::classname(), [
         'options' => [
-            'placeholder' => 'Enter event time ...',
-            'value' => $model->active_to ? date('d-m-y H:i:s', $model->active_to) : '',
+                'placeholder' => 'Enter event time ...',
+                'value' => $model->active_to ? date('d-m-Y H:i:s', $model->active_to) : '',
             ],
         'pluginOptions' => [
             'autoclose' => true,
