@@ -25,12 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'sds',
             'certificate_num',
-            'active_form',
-            'active_to',
-            //'certification_body_information:ntext',
-            //'service_information:ntext',
-            //'manufacturer_information:ntext',
-            //'applicant_information:ntext',
+            [
+                'attribute' => 'active_from',
+                'format' => 'html',
+                'value' => function($model){
+                    return date('d-m-Y H:i:s', $model->active_from);
+                }
+            ],
+            [
+                'attribute' => 'active_to',
+                'format' => 'html',
+                'value' => function($model){
+                    return date('d-m-Y H:i:s', $model->active_to);
+                }
+            ],
+            'certification_body_information',
+            'service_information',
+            'manufacturer_information',
+            'applicant_information',
             //'meets_requirements',
 
             ['class' => 'yii\grid\ActionColumn'],

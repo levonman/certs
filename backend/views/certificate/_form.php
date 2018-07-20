@@ -5,13 +5,13 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\datetime\DateTimePicker;
 
-$sds = [
-        'РПО' => 'РПО',
-        'Халяль' => 'Халяль',
-        'Пожарный контроль' => 'Пожарный контроль',
-        'ОРГАНИК' => 'ОРГАНИК',
-        'ЭКОЛОГИЧЕСКИЙ КОНТРОЛЬ ОРГАНИЗАЦИЙ' => 'ЭКОЛОГИЧЕСКИЙ КОНТРОЛЬ ОРГАНИЗАЦИЙ',
+$sdsList = [
         'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ' => 'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ',
+        'ЭКОЛОГИЧЕСКИЙ КОНТРОЛЬ ОРГАНИЗАЦИЙ' => 'ЭКОЛОГИЧЕСКИЙ КОНТРОЛЬ ОРГАНИЗАЦИЙ',
+        'ОРГАНИК' => 'ОРГАНИК',
+        'Пожарный контроль' => 'Пожарный контроль',
+        'Халяль' => 'Халяль',
+        'РПО' => 'РПО',
     ];
 
 /* @var $this yii\web\View */
@@ -21,16 +21,22 @@ $sds = [
 
 <div class="certificate-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'validationUrl' => ['ajax-validation'],
+        'enableAjaxValidation' => true
+    ]); ?>
 
-    <?= $form->field($model, 'sds')->dropDownList($sds) ?>
+    <?= $form->field($model, 'sds')->dropDownList($sdsList) ?>
 
     <?= $form->field($model, 'certificate_num')->textInput(['maxlength' => true]) ?>
 
     <?=
         $form->field($model, 'active_from')->widget(DateTimePicker::classname(), [
-        'options' => ['placeholder' => 'Enter event time ...'],
-        'pluginOptions' => [
+        'options' => [
+                'placeholder' => 'Enter event time ...',
+                'value' => $model->active_from ? date('d-m-y H:i:s', $model->active_from) : '',
+        ],
+            'pluginOptions' => [
             'autoclose' => true,
             'format' => 'dd-mm-yyyy H:i:s',
         ]
@@ -39,7 +45,10 @@ $sds = [
 
     <?=
     $form->field($model, 'active_to')->widget(DateTimePicker::classname(), [
-        'options' => ['placeholder' => 'Enter event time ...'],
+        'options' => [
+            'placeholder' => 'Enter event time ...',
+            'value' => $model->active_to ? date('d-m-y H:i:s', $model->active_to) : '',
+            ],
         'pluginOptions' => [
             'autoclose' => true,
             'format' => 'dd-mm-yyyy H:i:s',

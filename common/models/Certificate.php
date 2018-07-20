@@ -21,10 +21,10 @@ use Yii;
 class Certificate extends \yii\db\ActiveRecord
 {
 
-    public $sds = [
-                'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ' => 'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ',
+    public $sdsList = [
+                'РПО' => 'РПО',
                 'ЭКОЛОГИЧЕСКИЙ КОНТРОЛЬ ОРГАНИЗАЦИЙ' => 'ЭКОЛОГИЧЕСКИЙ КОНТРОЛЬ ОРГАНИЗАЦИЙ', 'ОРГАНИК' => 'ОРГАНИК',
-                'Пожарный контроль' => 'Пожарный контроль', 'Халяль' => 'Халяль', 'РПО' => 'РПО'
+                'Пожарный контроль' => 'Пожарный контроль', 'Халяль' => 'Халяль', 'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ' => 'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ',
             ];
 
     /**
@@ -42,11 +42,36 @@ class Certificate extends \yii\db\ActiveRecord
     {
         return [
             [['active_from', 'active_to', 'sds', 'certificate_num', 'certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'required'],
-            ['sds', 'in', 'range' => $this->sds],
+            [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false],
+            [['active_from', 'active_to'], 'customDateTimeCompare', 'skipOnEmpty' => false],
+            ['sds', 'in', 'range' => $this->sdsList],
             [['certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'string'],
             [['sds', 'certificate_num'], 'string', 'max' => 255],
             [['meets_requirements'], 'string', 'max' => 1],
         ];
+    }
+
+    public function customDateTimeValidate($attribute){
+        $date = date_create($this->$attribute);
+        if(!$date){
+            $this->addError($attribute, 'False date specified');
+        }
+    }
+
+    public function customDateTimeCompare($attribute){
+        $active_from = $date = date_create($this->active_from);
+        $active_to = $date = date_create($this->active_to);
+
+        if($active_from && $active_to){
+            $active_from = date_format($active_from, 'U');
+            $active_to = date_format($active_to, 'U');
+            $this->active_from = $active_from;
+            $this->active_to = $active_to;
+
+            if($active_from >= $active_to){
+                $this->addError($attribute, 'Active from date must be < active to date');
+            }
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\form\ActiveForm;
 
 /**
  * CertificateController implements the CRUD actions for Certificate model.
@@ -57,6 +58,25 @@ class CertificateController extends Controller
         ]);
     }
 
+    public function actionAjaxValidation()
+    {
+        $post = Yii::$app->request->post();
+        $model = new Certificate();
+
+        $model->load($post);
+
+        $array = ActiveForm::validate($model);
+
+        return json_encode($array);
+    }
+
+    public function actionTrial(){
+        $date = date_create('12.12.2018 12.12.12');
+
+        echo '<pre>';
+        print_r($date);
+    }
+
     /**
      * Creates a new Certificate model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -64,21 +84,10 @@ class CertificateController extends Controller
      */
     public function actionCreate()
     {
-        $post = Yii::$app->request->post();
         $model = new Certificate();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            echo '<pre>';
-//            print_r($post);
-//            print_r($model); die;
-            $date = \DateTime::createFromFormat('d-m-Y H:i:s', $model->active_from);
-            die($date->format('Y-m-d H:i:s'));
-            print_r($date); die;
-//            echo $date->format('Y-m-d');die;
-            if($model->save()){
-                return $this->redirect(['index']);
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
