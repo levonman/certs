@@ -1,11 +1,14 @@
 <?php
 namespace backend\controllers;
 
+use common\models\LoginForm;
+use common\models\User;
+use common\models\SignupForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use yii\data\ActiveDataProvider;
 
 /**
  * Site controller
@@ -30,6 +33,15 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['create-user', 'update-user', 'users-list', 'delete-user'],
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            if(!Yii::$app->user->isGuest){
+                                return Yii::$app->user->identity->status == 20;
+                            }
+                        }
+                    ]
                 ],
             ],
             'verbs' => [
@@ -51,6 +63,16 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    public function actionUsersList(){
+        $dataProvider = new ActiveDataProvider([
+            'query' => User::find(),
+        ]);
+
+        return $this->render('users-list', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -76,7 +98,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect('index');
         } else {
             $model->password = '';
 
@@ -96,5 +118,58 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionCreateUser()
+    {
+        $model = new SignupForm();
+        $model->scenario = 'insert';
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionUpdateUser($id){
+
+        $user = User::find()->where(['id' => $id])->one();
+        $model = new SignupForm();
+        $model->scenario = 'update';
+        $model->username = $user->username;
+        $model->name = $user->name;
+        $model->surname = $user->surname;
+        $model->type = $user->status;
+        $model->email = $user->email;
+        $model->password = '';
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup($id)) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', compact('model'));
+    }
+
+    public function actionDeleteUser($id){
+//        $user = User::find()->where(['id' => $id])->one();
+//
+//        if($user->delete()){
+//            return $this->redirect('/c_admin/site/users-list');
+//        }
     }
 }

@@ -25,7 +25,8 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
+    const STATUS_ADMIN = 20;
+    const STATUS_EDITOR = 30;
 
     /**
      * {@inheritdoc}
@@ -51,8 +52,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+//            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            [['name', 'surname'], 'safe'],
+            [['name', 'surname'], 'required'],
+            ['status', 'default', 'value' => self::STATUS_EDITOR],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_ADMIN, self::STATUS_EDITOR]],
         ];
     }
 
@@ -61,7 +65,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::find(['id' => $id])->andWhere(['in','status',[self::STATUS_EDITOR,self::STATUS_ADMIN]])->one();
     }
 
     /**
@@ -80,7 +84,8 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::find()->where(['username' => $username])->andWhere(['in','status',[self::STATUS_EDITOR,self::STATUS_ADMIN]])->one();
+
     }
 
     /**

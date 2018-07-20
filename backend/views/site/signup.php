@@ -7,8 +7,12 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = 'Signup';
+//$this->params['breadcrumbs'][] = $this->title;
+
+$this->title = $model->username ? 'Update User: ' . $model->username : 'Create User';
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['users-list']];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>

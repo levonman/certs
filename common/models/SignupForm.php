@@ -1,8 +1,7 @@
 <?php
-namespace frontend\models;
+namespace common\models;
 
 use yii\base\Model;
-use common\models\User;
 
 /**
  * Signup form
@@ -64,7 +63,7 @@ class SignupForm extends Model
 
 //        echo '<pre>';
 //        print_r('Username '.$this->username.' Email '.$this->email.' Type'.$this->type); die;
-        
+
         $user = $id ? User::find()->where(['id' => $id])->one() : new User();
         $user->username = $this->username;
         $user->email = $this->email;
@@ -73,7 +72,7 @@ class SignupForm extends Model
         $user->surname = $this->surname;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
+
         return $user->save() ? $user : null;
     }
 }
