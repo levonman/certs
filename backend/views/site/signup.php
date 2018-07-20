@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\datetime\DateTimePicker;
 
 //$this->title = 'Signup';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -21,7 +22,11 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            <?php $form = ActiveForm::begin([
+                    'id' => 'form-signup',
+                    'validationUrl' => ['ajax-validation'],
+                    'enableAjaxValidation' => true
+            ]); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
@@ -32,6 +37,36 @@ $this->params['breadcrumbs'][] = 'Update';
                 <?= $form->field($model, 'email') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
+
+                <?=
+                    $form->field($model, 'active_from')->widget(DateTimePicker::classname(), [
+                        'options' => [
+                            'placeholder' => 'Enter event time ...',
+                            'value' => $model->active_from ? date('d-m-y H:i:s', $model->active_from) : '',
+                        ],
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd-mm-yyyy H:i:s',
+                        ]
+                    ]);
+                ?>
+
+                <?=
+                    $form->field($model, 'active_to')->widget(DateTimePicker::classname(), [
+                        'options' => [
+                            'placeholder' => 'Enter event time ...',
+                            'value' => $model->active_to ? date('d-m-y H:i:s', $model->active_to) : '',
+                        ],
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd-mm-yyyy H:i:s',
+                        ]
+                    ]);
+                ?>
+
+                <?= $form->field($model, 'authority_certificate')->textarea(['rows' => 6])?>
+
+                <?= $form->field($model, 'body_data')->textarea(['rows' => 6])?>
 
                 <?= $form->field($model, 'type')->dropDownList([30 => 'Editor', 20 => 'Admin'])?>
 

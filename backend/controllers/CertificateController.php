@@ -70,12 +70,6 @@ class CertificateController extends Controller
         return json_encode($array);
     }
 
-    public function actionTrial(){
-        $date = date_create('12.12.2018 12.12.12');
-
-        echo '<pre>';
-        print_r($date);
-    }
 
     /**
      * Creates a new Certificate model.

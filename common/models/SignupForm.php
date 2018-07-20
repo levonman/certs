@@ -14,12 +14,16 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $type;
+    public $authority_certificate;
+    public $body_data;
+    public $active_from;
+    public $active_to;
 
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['insert'] = ['username', 'name', 'surname', 'password', 'email', 'type'];
-        $scenarios['update'] = ['username', 'name', 'surname', 'password', 'email', 'type'];
+        $scenarios['insert'] = ['username', 'name', 'surname', 'password', 'email', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'];
+        $scenarios['update'] = ['username', 'name', 'surname', 'password', 'email', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'];
         return $scenarios;
     }
 
@@ -30,8 +34,10 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['type', 'name', 'surname', 'email', 'password', 'type'], 'safe', 'on' => ['insert', 'update']],
-            [['type', 'name', 'surname', 'email', 'password', 'type'], 'required', 'on' => ['insert', 'update']],
+            [['type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'safe', 'on' => ['insert', 'update']],
+            [['type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'required', 'on' => ['insert', 'update']],
+            [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false],
+            [['active_from', 'active_to'], 'customDateTimeCompare', 'skipOnEmpty' => false],
             ['type', 'in', 'range' => [20, 30], 'on' => ['insert', 'update']],
 
             ['username', 'trim', 'on' => ['insert', 'update']],
@@ -61,9 +67,6 @@ class SignupForm extends Model
             return null;
         }
 
-//        echo '<pre>';
-//        print_r('Username '.$this->username.' Email '.$this->email.' Type'.$this->type); die;
-
         $user = $id ? User::find()->where(['id' => $id])->one() : new User();
         $user->username = $this->username;
         $user->email = $this->email;
@@ -74,5 +77,28 @@ class SignupForm extends Model
         $user->generateAuthKey();
 
         return $user->save() ? $user : null;
+    }
+
+    public function customDateTimeValidate($attribute){
+        $date = date_create($this->$attribute);
+        if(!$date){
+            $this->addError($attribute, 'False date specified');
+        }
+    }
+
+    public function customDateTimeCompare($attribute){
+        $active_from = $date = date_create($this->active_from);
+        $active_to = $date = date_create($this->active_to);
+
+        if($active_from && $active_to){
+            $active_from = date_format($active_from, 'U');
+            $active_to = date_format($active_to, 'U');
+            $this->active_from = $active_from;
+            $this->active_to = $active_to;
+
+            if($active_from >= $active_to){
+                $this->addError($attribute, 'Active from date must be < active to date');
+            }
+        }
     }
 }

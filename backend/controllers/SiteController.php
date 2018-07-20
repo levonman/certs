@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
+use kartik\form\ActiveForm;
 
 /**
  * Site controller
@@ -171,5 +172,17 @@ class SiteController extends Controller
         if($user->delete()){
             return $this->redirect('/c_admin/site/users-list');
         }
+    }
+
+    public function actionAjaxValidation()
+    {
+        $post = Yii::$app->request->post();
+        $model = new SignupForm();
+
+        $model->load($post);
+
+        $array = ActiveForm::validate($model);
+
+        return json_encode($array);
     }
 }
