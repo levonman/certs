@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('', "/c_admin/site/update-user/".$model->id, ['class' => 'glyphicon glyphicon-pencil']);
                     },
                     'delete' => function($url, $model, $key) {     // render your custom button
-                        return Html::a('', '#', ['class' => 'glyphicon glyphicon-trash delete-user', 'id' => 'delete-user-'.$model->id]);
+                        return Html::a('', '/c_admin/site/delete-user/'.$model->id, ['class' => 'glyphicon glyphicon-trash delete-user']);
                     },
                 ]
             ],
@@ -46,9 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?php
 DialogAsset::register($this);
-$this->registerJs("\$('#delete-user-8').on('click', function() {
-    BootstrapDialog.alert('I want banana!');
-    console.log('It works');
-    return false;
+$this->registerJs("\$('.delete-user').on('click', function() {
+    if(!confirm('Are you sure you want to delete this user?')){
+        return false;
+    }
 });");
 ?>

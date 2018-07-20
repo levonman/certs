@@ -132,7 +132,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                    return $this->redirect(['users-list']);
                 }
             }
         }
@@ -157,7 +157,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup($id)) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                    return $this->redirect(['users-list']);
                 }
             }
         }
@@ -166,10 +166,10 @@ class SiteController extends Controller
     }
 
     public function actionDeleteUser($id){
-//        $user = User::find()->where(['id' => $id])->one();
-//
-//        if($user->delete()){
-//            return $this->redirect('/c_admin/site/users-list');
-//        }
+        $user = User::find()->where(['id' => $id])->one();
+
+        if($user->delete()){
+            return $this->redirect('/c_admin/site/users-list');
+        }
     }
 }
