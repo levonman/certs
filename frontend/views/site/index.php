@@ -1,53 +1,113 @@
-<?php
 
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+<section class="header">
+    <div class="container">
+        <div class="logo_div">
+            <img src="image/logo1.png" alt="" class="top_logo">
+            <p class="logo_text">Lorem ipsum dolor sit amet, consectetur </p>
         </div>
-
+        <div class="input_div">
+            <input type="text">
+            <button>Поиск</button>
+        </div>
     </div>
-</div>
+    <div class="table">
+        <table id="table">
+            <tr id="tr1">
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+                <th>lorem</th>
+            </tr>
+            <tr id="tr2">
+                <th>lorem</th>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+            </tr>
+            <tr id="tr3">
+                <th>lorem</th>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+            </tr>
+            <tr id="tr4">
+                <th>lorem</th>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+            </tr>
+            <tr id="tr5">
+                <th>lorem</th>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+                <td>lorem</td>
+            </tr>
+        </table>
+    </div>
+</section>
+<section class="body">
+    <div class="container">
+        <p class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet, distinctio et sit sunt
+            voluptate.</p>
+        <p class="sub_title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, repellat.</p>
+        <p class="desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam asperiores
+            aspernatur assumenda autem cum deleniti dolorum ea est et eveniet ex, expedita facilis impedit laboriosam
+            nisi placeat possimus, quia quibusdam rem reprehenderit saepe sint sunt temporibus, totam velit
+            voluptates!</p>
+        <p class="sub_title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, repellat.</p>
+        <p class="desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam asperiores
+            aspernatur assumenda autem cum deleniti dolorum ea est et eveniet ex, expedita facilis impedit laboriosam
+            nisi placeat possimus, quia quibusdam rem reprehenderit saepe sint sunt temporibus, totam velit
+            voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolorum error, labore
+            nesciunt odit quibusdam quo saepe sed sunt veritatis.</p>
+        <p class="sub_title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, repellat.</p>
+        <p class="desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam asperiores
+            aspernatur assumenda autem cum deleniti dolorum ea est et eveniet ex, expedita facilis impedit laboriosam
+            nisi placeat possimus, quia quibusdam rem reprehenderit saepe sint sunt temporibus, totam velit
+            voluptates!</p>
+        <p class="sub_title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, repellat.</p>
+        <p class="desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam asperiores
+            aspernatur assumenda autem cum deleniti dolorum ea est et eveniet ex, expedita facilis impedit laboriosam
+            nisi placeat possimus, quia quibusdam rem reprehenderit saepe sint sunt temporibus, totam velit
+            voluptates!</p>
+        <p class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis deleniti deserunt
+            facere
+            labore, maiores nobis non repellendus saepe veniam?</p>
+    </div>
+</section>
+<footer>
+    <div class="logo_div_footer">
+        <img src="image/logo2.png" alt="" class="footer_logo">
+    </div>
+    <p class="copyright">All rights reserved <span class="glyphicon glyphicon-copyright-mark"></span> 2018</p>
+</footer>
