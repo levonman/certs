@@ -81,15 +81,21 @@ $this_user = Yii::$app->user->identity;
                 <div id="main-menu">
                     <ul class="sidebar-nav">
 
-                        <!--                        --><?php //if (Yii::$app->user->identity->can('Category', 'read')): ?>
-                        <!--                            <li class="-->
-                        <?php //echo Yii::$app->controller->id == "categories" ? "current" : ""; ?><!--">-->
-                        <!--                                <a href="-->
-                        <?php //echo Url::to(['categories/index']) ?><!--"><i class="fa fa-list-ul"></i><span-->
-                        <!--                                        class="sidebar-text">-->
-                        <?php //echo Yii::t('app', 'Categories') ?><!--</span></a>-->
-                        <!--                            </li>-->
-                        <!--                        --><?php //endif; ?>
+                        <?php if (Yii::$app->user->identity->can('Certificate', 'read')): ?>
+                            <li class="<?php echo Yii::$app->controller->id == "certificate" ? "current" : ""; ?>">
+                                <a href="<?php echo Url::to(['certificate/index']) ?>"><i class="fa fa-list-ul"></i>
+                                    <span class="sidebar-text"> <?php echo Yii::t('app', 'Certificate') ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php if (Yii::$app->user->identity->can('User', 'read')): ?>
+                            <li class="<?php echo Yii::$app->controller->id == "user" ? "current" : ""; ?>">
+                                <a href="<?php echo Url::to(['site/create-user']) ?>"><i class="fa fa-list-ul"></i>
+                                    <span class="sidebar-text"> <?php echo Yii::t('app', 'User') ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </nav>
