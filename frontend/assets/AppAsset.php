@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
         'css/bootstrap-3.3.7/dist/css/bootstrap.css',
     ];
     public $js = [
+        '/js/search.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

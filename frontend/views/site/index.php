@@ -6,74 +6,11 @@
             <p class="logo_text">Lorem ipsum dolor sit amet, consectetur </p>
         </div>
         <div class="input_div">
-            <input type="text">
-            <button>Поиск</button>
+            <input type="text" name="term" class="term">
+            <button type="button" id="search">Поиск</button>
         </div>
     </div>
-    <div class="table">
-        <table id="table">
-            <tr id="tr1">
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-                <th>lorem</th>
-            </tr>
-            <tr id="tr2">
-                <th>lorem</th>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-            </tr>
-            <tr id="tr3">
-                <th>lorem</th>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-            </tr>
-            <tr id="tr4">
-                <th>lorem</th>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-            </tr>
-            <tr id="tr5">
-                <th>lorem</th>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-                <td>lorem</td>
-            </tr>
-        </table>
-    </div>
+    <div class="results"></div>
 </section>
 <section class="body">
     <div class="container">
