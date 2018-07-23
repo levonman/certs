@@ -4,6 +4,7 @@ use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
 use kartik\form\ActiveForm;
 use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
 
 $sdsList = [
         'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ' => 'ФЕДЕРАЛЬНО БЮРО СЕРТИФИКАЦИИ',
@@ -31,27 +32,29 @@ $sdsList = [
     <?= $form->field($model, 'certificate_num')->textInput(['maxlength' => true]) ?>
 
     <?=
-        $form->field($model, 'active_from')->widget(DateTimePicker::classname(), [
-        'options' => [
-                'placeholder' => 'Enter event time ...',
-                'value' => $model->active_from ? date('d-m-Y H:i:s', $model->active_from) : '',
-        ],
+        $form->field($model, 'active_from')->widget(DatePicker::classname(), [
+            'options' => [
+                    'placeholder' => 'Enter birth date ...',
+                    'value' => $model->active_from ? date('d-m-Y', $model->active_from) : '',
+            ],
             'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'dd-mm-yyyy H:i:s',
-        ]
+                'autoclose'=>true,
+                'todayHighlight' => true,
+                'format' => 'dd-mm-yyyy',
+            ]
         ]);
     ?>
 
     <?=
-    $form->field($model, 'active_to')->widget(DateTimePicker::classname(), [
+    $form->field($model, 'active_to')->widget(DatePicker::classname(), [
         'options' => [
-                'placeholder' => 'Enter event time ...',
-                'value' => $model->active_to ? date('d-m-Y H:i:s', $model->active_to) : '',
-            ],
+            'placeholder' => 'Enter birth date ...',
+            'value' => $model->active_from ? date('d-m-Y', $model->active_from) : '',
+        ],
         'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'dd-mm-yyyy H:i:s',
+            'autoclose'=>true,
+            'todayHighlight' => true,
+            'format' => 'dd-mm-yyyy',
         ]
     ]);
     ?>

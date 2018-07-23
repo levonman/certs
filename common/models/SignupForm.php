@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use Yii;
 use yii\base\Model;
 
 /**
@@ -38,7 +39,8 @@ class SignupForm extends Model
             [['action', 'type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'safe', 'on' => ['insert', 'update']],
             [['type', 'name', 'surname', 'email', 'password', 'type', 'authority_certificate', 'body_data', 'active_from', 'active_to'], 'required', 'on' => ['insert', 'update']],
             [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false, 'on' => ['insert', 'update']],
-            [['active_from', 'active_to'], 'customDateTimeCompare', 'skipOnEmpty' => false, 'on' => ['insert', 'update']],
+            ['active_from', 'customDateTimeCompare', 'skipOnEmpty' => false, 'on' => ['insert', 'update']],
+            ['active_to', 'customDateTimeCompare', 'skipOnEmpty' => false, 'on' => ['insert', 'update']],
             ['type', 'in', 'range' => [20, 30], 'on' => ['insert', 'update']],
 
             ['username', 'trim', 'on' => ['insert', 'update']],
@@ -105,5 +107,21 @@ class SignupForm extends Model
                 $this->addError($attribute, 'Active from date must be < active to date');
             }
         }
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'username' => 'Имя пользователя',
+            'password' => 'Пароль',
+            'email' => 'Email',
+            'authority_certificate' => 'Аттестат органа',
+            'body_data' => 'Данные органа',
+            'active_from' => 'Действителен с (календарик)',
+            'active_to' => 'Действителен по (календарик)',
+            'type' => 'Тип'
+        ];
     }
 }
