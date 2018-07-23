@@ -27,17 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'certificate_num',
             [
                 'attribute' => 'active_from',
-                'format' => 'html',
-                'value' => function($model){
-                    return date('d-m-Y', $model->active_from);
-                }
             ],
             [
                 'attribute' => 'active_to',
-                'format' => 'html',
-                'value' => function($model){
-                    return date('d-m-Y', $model->active_to);
-                }
             ],
             'certification_body_information',
             'service_information',

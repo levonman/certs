@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Certificate;
+use frontend\models\Search;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -75,14 +76,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'new';
-        return $this->render('index');
+        $model = new Search();
+        return $this->render('index',['model' => $model]);
     }
 
     public function actionSearch()
     {
-        $term = Yii::$app->request->post('term');
-        $res = Certificate::find()->where(['like', 'certificate_num', $term])->all();
+      $model = new Search();
+      if($model->load(Yii::$app->request->post()) && $model->validate()){
+          $res = Certificate::find()->where(['certificate_num'=>$model->term])->andWhere(['active_from' =>$model->date])->all();
         return $this->renderAjax('_table',['res' => $res]);
+      }
+
     }
 
 

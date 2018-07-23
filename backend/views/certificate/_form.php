@@ -35,12 +35,12 @@ $sdsList = [
         $form->field($model, 'active_from')->widget(DatePicker::classname(), [
             'options' => [
                     'placeholder' => 'Enter birth date ...',
-                    'value' => $model->active_from ? date('d-m-Y', $model->active_from) : '',
+                    'value' => $model->active_from ? $model->active_from : date('Y-m-d'),
             ],
             'pluginOptions' => [
                 'autoclose'=>true,
                 'todayHighlight' => true,
-                'format' => 'dd-mm-yyyy',
+                'format' => 'yyyy-mm-dd',
             ]
         ]);
     ?>
@@ -49,12 +49,12 @@ $sdsList = [
     $form->field($model, 'active_to')->widget(DatePicker::classname(), [
         'options' => [
             'placeholder' => 'Enter birth date ...',
-            'value' => $model->active_from ? date('d-m-Y', $model->active_from) : '',
+            'value' => $model->active_to ? $model->active_to : date('Y-m-d'),
         ],
         'pluginOptions' => [
             'autoclose'=>true,
             'todayHighlight' => true,
-            'format' => 'dd-mm-yyyy',
+            'format' => 'yyyy-mm-dd',
         ]
     ]);
     ?>

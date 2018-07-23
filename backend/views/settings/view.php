@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Certificate */
+/* @var $model common\models\Settings */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Certificates', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="certificate-view">
+<div class="settings-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,19 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'sds',
-            'certificate_num',
-            [
-                'attribute' => 'active_from',
-            ],
-            [
-                'attribute' => 'active_to',
-            ],
-            'certification_body_information:ntext',
-            'service_information:ntext',
-            'manufacturer_information:ntext',
-            'applicant_information:ntext',
-            'meets_requirements',
+            'key',
+            'value:ntext',
         ],
     ]) ?>
 

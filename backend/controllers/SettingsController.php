@@ -3,18 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Certificate;
+use common\models\Settings;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use kartik\form\ActiveForm;
 use yii\filters\AccessControl;
 
 /**
- * CertificateController implements the CRUD actions for Certificate model.
+ * SettingsController implements the CRUD actions for Settings model.
  */
-class CertificateController extends Controller
+class SettingsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -26,7 +25,11 @@ class CertificateController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'view','index', 'delete','ajax-validation'],
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['create', 'update', 'view','index', 'delete'],
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             if(!Yii::$app->user->isGuest){
@@ -46,13 +49,13 @@ class CertificateController extends Controller
     }
 
     /**
-     * Lists all Certificate models.
+     * Lists all Settings models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Certificate::find(),
+            'query' => Settings::find(),
         ]);
 
         return $this->render('index', [
@@ -61,7 +64,7 @@ class CertificateController extends Controller
     }
 
     /**
-     * Displays a single Certificate model.
+     * Displays a single Settings model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -73,30 +76,16 @@ class CertificateController extends Controller
         ]);
     }
 
-    public function actionAjaxValidation()
-    {
-        $post = Yii::$app->request->post();
-        $model = new Certificate();
-
-        $model->load($post);
-
-        $array = ActiveForm::validate($model);
-
-        return json_encode($array);
-    }
-
-
     /**
-     * Creates a new Certificate model.
+     * Creates a new Settings model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Certificate();
+        $model = new Settings();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -106,7 +95,7 @@ class CertificateController extends Controller
     }
 
     /**
-     * Updates an existing Certificate model.
+     * Updates an existing Settings model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -126,7 +115,7 @@ class CertificateController extends Controller
     }
 
     /**
-     * Deletes an existing Certificate model.
+     * Deletes an existing Settings model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -140,15 +129,15 @@ class CertificateController extends Controller
     }
 
     /**
-     * Finds the Certificate model based on its primary key value.
+     * Finds the Settings model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Certificate the loaded model
+     * @return Settings the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Certificate::findOne($id)) !== null) {
+        if (($model = Settings::findOne($id)) !== null) {
             return $model;
         }
 

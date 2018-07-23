@@ -11,15 +11,15 @@
         </thead>
         <?php foreach ($res as $item): ?>
             <tr id="tr2">
-                <th><?= $item->sds;?></th>
-                <th><?= $item->certificate_num;?></th>
-                <th><?= $item->active_from;?></th>
-                <th><?= $item->active_to;?></th>
-                <th><?= $item->certification_body_information;?></th>
-                <th><?= $item->service_information;?></th>
-                <th><?= $item->manufacturer_information;?></th>
-                <th><?= $item->applicant_information;?></th>
-                <th><?= $item->meets_requirements;?></th>
+                <td><?= $item->sds;?></td>
+                <td><?= $item->certificate_num;?></td>
+                <td><?= $item->active_from;?></td>
+                <td><?= $item->active_to;?></td>
+                <td><?= $item->certification_body_information;?></td>
+                <td><?= $item->service_information;?></td>
+                <td><?= $item->manufacturer_information;?></td>
+                <td><?= $item->applicant_information;?></td>
+                <td><?= $item->meets_requirements ? 'ДА' : 'НЕТ';?></td>
             </tr>
         <?php endforeach; ?>
     </table>

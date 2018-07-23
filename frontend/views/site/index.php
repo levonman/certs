@@ -1,4 +1,7 @@
-
+<?php
+use  yii\widgets\ActiveForm;
+use yii\bootstrap\Html;
+?>
 <section class="header">
     <div class="container">
         <div class="logo_div">
@@ -6,8 +9,14 @@
             <p class="logo_text">Lorem ipsum dolor sit amet, consectetur </p>
         </div>
         <div class="input_div">
-            <input type="text" name="term" class="term">
-            <button type="button" id="search">Поиск</button>
+            <?php $form = ActiveForm::begin(['id' => 'search']); ?>
+
+            <?= $form->field($model, 'term')->textInput(['autofocus' => true]) ?>
+            <hr />
+            <?= $form->field($model, 'date')->input('date') ?>
+
+            <?= Html::submitButton('Поиск', ['class' => 'btn', 'name' => 'search']) ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
     <div class="results"></div>

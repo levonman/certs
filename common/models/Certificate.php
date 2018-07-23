@@ -44,7 +44,6 @@ class Certificate extends \yii\db\ActiveRecord
             [['active_from', 'active_to', 'sds', 'certificate_num', 'certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'required'],
             [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false],
             ['active_from', 'customDateTimeCompare', 'skipOnEmpty' => false],
-            ['active_to', 'customDateTimeCompare', 'skipOnEmpty' => false],
             ['sds', 'in', 'range' => $this->sdsList],
             [['certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'string'],
             [['sds', 'certificate_num'], 'string', 'max' => 255],
@@ -67,8 +66,6 @@ class Certificate extends \yii\db\ActiveRecord
         if($active_from && $active_to){
             $active_from = date_format($active_from, 'U');
             $active_to = date_format($active_to, 'U');
-            $this->active_from = $active_from;
-            $this->active_to = $active_to;
 
             if($active_from >= $active_to){
                 $this->addError($attribute, "Active from date must be < Active to date");
@@ -85,10 +82,10 @@ class Certificate extends \yii\db\ActiveRecord
             'id' => 'ID',
             'sds' => 'СДС',
             'certificate_num' => 'Номер сертификата',
-            'active_from' => 'Действителен с (календарик)',
-            'active_to' => 'Действителен по (Календарик)',
+            'active_from' => 'Действителен с',
+            'active_to' => 'Действителен по',
             'certification_body_information' => 'Сведения об органе по сертификации',
-            'service_information' => 'Сведения о продукции ( услуге)',
+            'service_information' => 'Сведения о продукции (услуге)',
             'manufacturer_information' => 'Информация о изготовителе',
             'applicant_information' => 'Информация о заявителе',
             'meets_requirements' => 'Соответствует требованиям',

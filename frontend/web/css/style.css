@@ -46,7 +46,6 @@ body {
     color: white;
     border: none;
     margin-top: 10px;
-    height: 25px;
 }
 
 .table {
@@ -59,11 +58,13 @@ body {
     width: 80% !important;
     left: 10%;
     right: 10%;
-    top: 70%;
+    top: 95%;
     box-shadow: 0px 0px 10px 0px;
     border-radius: 5px;
 }
-
+.control-label{
+    color:white !important;
+}
 #table {
     margin: 0 auto;
     background-color: white;
@@ -73,15 +74,25 @@ body {
 
 #table th {
     text-align: center;
+    border-right: 1px solid #a0a0a0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #tr1 {
     border-bottom: 1px solid #a0a0a0;
+    border-right: 1px solid #a0a0a0;
 }
 
 #tr2, #tr4 {
     height: 60px;
     background-color: #efefef;
+}
+#tr2 td, #tr4 td{
+    border-right: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .body {
