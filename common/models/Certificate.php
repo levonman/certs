@@ -43,7 +43,8 @@ class Certificate extends \yii\db\ActiveRecord
         return [
             [['active_from', 'active_to', 'sds', 'certificate_num', 'certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'required'],
             [['active_from', 'active_to'], 'customDateTimeValidate', 'skipOnEmpty' => false],
-            [['active_from', 'active_to'], 'customDateTimeCompare', 'skipOnEmpty' => false],
+            ['active_from', 'customDateTimeCompare', 'skipOnEmpty' => false],
+            ['active_to', 'customDateTimeCompare', 'skipOnEmpty' => false],
             ['sds', 'in', 'range' => $this->sdsList],
             [['certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'string'],
             [['sds', 'certificate_num'], 'string', 'max' => 255],
@@ -59,6 +60,7 @@ class Certificate extends \yii\db\ActiveRecord
     }
 
     public function customDateTimeCompare($attribute){
+
         $active_from = $date = date_create($this->active_from);
         $active_to = $date = date_create($this->active_to);
 
@@ -69,7 +71,7 @@ class Certificate extends \yii\db\ActiveRecord
             $this->active_to = $active_to;
 
             if($active_from >= $active_to){
-                $this->addError($attribute, 'Active from date must be < active to date');
+                $this->addError($attribute, "Active from date must be < Active to date");
             }
         }
     }
@@ -81,15 +83,15 @@ class Certificate extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'sds' => 'Sds',
-            'certificate_num' => 'Certificate Num',
-            'active_from' => 'Active From',
-            'active_to' => 'Active To',
-            'certification_body_information' => 'Certification Body Information',
-            'service_information' => 'Service Information',
-            'manufacturer_information' => 'Manufacturer Information',
-            'applicant_information' => 'Applicant Information',
-            'meets_requirements' => 'Meets Requirements',
+            'sds' => 'СДС',
+            'certificate_num' => 'Номер сертификата',
+            'active_from' => 'Действителен с (календарик)',
+            'active_to' => 'Действителен по (Календарик)',
+            'certification_body_information' => 'Сведения об органе по сертификации',
+            'service_information' => 'Сведения о продукции ( услуге)',
+            'manufacturer_information' => 'Информация о изготовителе',
+            'applicant_information' => 'Информация о заявителе',
+            'meets_requirements' => 'Соответствует требованиям',
         ];
     }
 }
