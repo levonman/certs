@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
                 <?= $form->field($model, 'body_data')->textarea(['rows' => 6])?>
 
-                <?= $form->field($model, 'type')->dropDownList([30 => 'Editor', 20 => 'Admin'])?>
+                <?= $form->field($model, 'type')->dropDownList([30 => 'Клиент', 20 => 'Администратор'])?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

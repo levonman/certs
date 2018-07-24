@@ -39,7 +39,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             if(!Yii::$app->user->isGuest){
-                                return Yii::$app->user->identity->status == 20;
+                                return Yii::$app->user->identity->can(Yii::$app->controller->id,'');
                             }
                         }
                     ]
@@ -99,10 +99,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('index');
+            return $this->redirect('/c_admin/certificate/index');
         } else {
-            $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -160,11 +158,11 @@ class SiteController extends Controller
         $model->password = '';
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup($id)) {
-                if (Yii::$app->getUser()->login($user)) {
+          //  if ($user = $model->signup($id)) {
+           //     if (Yii::$app->getUser()->login($user)) {
                     return $this->redirect(['users-list']);
-                }
-            }
+             //   }
+           // }
         }
 
         return $this->render('signup', compact('model'));

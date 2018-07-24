@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::find(['id' => $id])->andWhere(['in','status',[self::STATUS_EDITOR,self::STATUS_ADMIN]])->one();
+        return static::find()->where(['id' => $id])->andWhere(['in','status',[self::STATUS_EDITOR,self::STATUS_ADMIN]])->one();
     }
 
     /**
@@ -84,7 +84,6 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::find()->where(['username' => $username])->andWhere(['in','status',[self::STATUS_EDITOR,self::STATUS_ADMIN]])->one();
-
     }
 
     /**

@@ -30,7 +30,7 @@ class CertificateController extends Controller
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             if(!Yii::$app->user->isGuest){
-                                return Yii::$app->user->identity->status == 20;
+                                return Yii::$app->user->identity->can(Yii::$app->controller->id,'');
                             }
                         }
                     ]

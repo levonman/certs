@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Certificate;
+use common\models\Settings;
 use frontend\models\Search;
 use Yii;
 use yii\base\InvalidParamException;
@@ -77,7 +78,8 @@ class SiteController extends Controller
     {
         $this->layout = 'new';
         $model = new Search();
-        return $this->render('index',['model' => $model]);
+        $text = Settings::find()->where(['key' => 'Text'])->one();
+        return $this->render('index',['model' => $model,'text' => $text]);
     }
 
     public function actionSearch()

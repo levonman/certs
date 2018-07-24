@@ -91,7 +91,7 @@ $this_user = Yii::$app->user->identity;
 
                         <?php if (Yii::$app->user->identity->can('User', 'read')): ?>
                             <li class="<?php echo Yii::$app->controller->id == "user" ? "current" : ""; ?>">
-                                <a href="<?php echo Url::to(['site/create-user']) ?>"><i class="fa fa-list-ul"></i>
+                                <a href="<?php echo Url::to(['site/users-list']) ?>"><i class="fa fa-list-ul"></i>
                                     <span class="sidebar-text"> <?php echo Yii::t('app', 'User') ?></span>
                                 </a>
                             </li>
