@@ -50,8 +50,8 @@ body {
 
 .table {
     text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;*/
+    /*padding-right: 15px;*/
     background: white;
     color: #a0a0a0;
     position: relative;
