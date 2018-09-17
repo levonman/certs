@@ -17,6 +17,7 @@ use Yii;
  * @property string $manufacturer_information
  * @property string $applicant_information
  * @property string $meets_requirements
+ * @property string $user_id
  */
 class Certificate extends \yii\db\ActiveRecord
 {
@@ -48,6 +49,8 @@ class Certificate extends \yii\db\ActiveRecord
             [['certification_body_information', 'service_information', 'manufacturer_information', 'applicant_information'], 'string'],
             [['sds', 'certificate_num'], 'string', 'max' => 255],
             [['meets_requirements'], 'string', 'max' => 1],
+            ['user_id', 'exist', 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            ['user_id', 'safe'],
         ];
     }
 
@@ -89,6 +92,7 @@ class Certificate extends \yii\db\ActiveRecord
             'manufacturer_information' => 'Информация о изготовителе',
             'applicant_information' => 'Информация о заявителе',
             'meets_requirements' => 'Соответствует требованиям',
+            'user_id' => 'Клиент',
         ];
     }
 }

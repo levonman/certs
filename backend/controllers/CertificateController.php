@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\form\ActiveForm;
 use yii\filters\AccessControl;
-
+use common\models\User;
 /**
  * CertificateController implements the CRUD actions for Certificate model.
  */
@@ -51,8 +51,9 @@ class CertificateController extends Controller
      */
     public function actionIndex()
     {
+        $query = Yii::$app->user->identity->status == User::STATUS_ADMIN ? Certificate::find() : Certificate::find()->where(['user_id' => Yii::$app->user->id]);
         $dataProvider = new ActiveDataProvider([
-            'query' => Certificate::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
@@ -94,10 +95,10 @@ class CertificateController extends Controller
     public function actionCreate()
     {
         $model = new Certificate();
-
+        $model->user_id = Yii::$app->user->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
