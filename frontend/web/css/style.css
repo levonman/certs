@@ -50,8 +50,8 @@ body {
 
 .table {
     text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;*/
+    /*padding-right: 15px;*/
     background: white;
     color: #a0a0a0;
     position: relative;
@@ -63,9 +63,11 @@ body {
     border-radius: 5px;
     z-index: 99;
 }
-.control-label{
-    color:white !important;
+
+.control-label {
+    color: white !important;
 }
+
 #table {
     margin: 0 auto;
     background-color: white;
@@ -89,7 +91,8 @@ body {
     height: 60px;
     background-color: #efefef;
 }
-#tr2 td, #tr4 td{
+
+#tr2 td, #tr4 td {
     border-right: 1px solid #a0a0a0;
     border-bottom: 1px solid #a0a0a0;
     padding-left: 5px;
@@ -137,12 +140,16 @@ footer {
     float: left;
 }
 
-.copyright{
+.copyright {
     width: 90%;
     float: left;
     height: 100%;
     color: white;
     text-align: center;
     line-height: 60px;
-    margin-bottom:  0;
+    margin-bottom: 0;
+}
+
+.btn:hover {
+    color: #fff !important;
 }
